@@ -1,0 +1,27 @@
+[
+  {
+    "department": "People Ops",
+    "urgency": "medium",
+    "message": "How do I send a recognition to someone on my team? I can’t find the eCard option."
+  },
+  {
+    "department": "IT",
+    "urgency": "high",
+    "message": "I can’t log in. SSO keeps failing and I get access denied."
+  },
+  {
+    "department": "Finance",
+    "urgency": "low",
+    "message": "Are there limits on how many points we can give per month? Is that policy documented?"
+  },
+  {
+    "department": "Customer Ops",
+    "urgency": "medium",
+    "message": "I redeemed my award but the order is pending and I never got a tracking email."
+  },
+  {
+    "department": "Other",
+    "urgency": "medium",
+    "message": "My coworker got recognized but I can’t see it in the feed—should I be able to?"
+  }
+]
