@@ -30,6 +30,48 @@ Given an unstructured request message, the app:
 - Explainability: classification includes rationale
 - No PII storage required (employee name is optional and unused in logic)
 
+## AI Usage & Model Strategy
+
+This project is intentionally designed with a clear separation between **AI-assisted interpretation** and **deterministic workflow execution**.
+
+### Where AI is used
+AI is applied only at the **intake stage**, where it adds measurable value:
+- Interpreting unstructured free-text requests
+- Classifying intent into predefined categories
+- Producing a confidence score
+- Providing an explainable rationale for each decision
+
+This mirrors common enterprise usage patterns where AI is best suited for **language understanding**, not for executing business-critical workflows.
+
+### Current implementation (demo)
+For the purposes of this demo, the AI layer is implemented using **deterministic classification logic** (keyword and token scoring). This approach was chosen to:
+- Ensure full explainability
+- Avoid external dependencies
+- Keep the demo easy to run locally
+- Highlight workflow design rather than model tuning
+
+The output contract (category, confidence, rationale) is intentionally model-agnostic.
+
+### Production-ready design
+In a production environment, this classification layer could be replaced with:
+- Microsoft Azure AI (Text Classification)
+- Azure OpenAI (Copilot-style LLM orchestration)
+
+without changing:
+- Workflow logic
+- Confidence thresholds
+- Escalation rules
+- Audit logging
+- Downstream integrations
+
+### Responsible AI guardrails
+- Confidence thresholds control automation vs. human review
+- Low-confidence cases are escalated automatically
+- All AI-assisted decisions are logged with rationale
+- AI does not make irreversible or policy-enforcing decisions
+
+This design prioritizes **safety, maintainability, and supportability** while still benefiting from AI where it is most effective.
+
 ## Run locally
 ```bash
 python -m venv .venv
