@@ -1,78 +1,94 @@
-# AI Workflow Triage Bot (Automation Engineer Demo)
+# AI Workflow Intake & Routing (Automation Engineer Demo)
 
-A lightweight demo that mirrors an enterprise automation pattern: **intake → AI classification → workflow routing → structured ticket + audit log → safe fallback to human review**.
+## 🚀 Live Demo (click to try)
+👉 **https://ai-workflow-intake-routing.onrender.com/**
 
-This project is intentionally designed to demonstrate:
-- Business-process-first automation thinking
-- Workflow-based routing (Power Automate style)
-- Responsible AI usage (confidence thresholds + escalation)
-- Clear, supportable outputs (JSON tickets + auditability)
+> Tip: Paste one of the test queries below and click **Run workflow**.
 
-## What it does
-Given an unstructured request message, the app:
-1. Classifies intent (category + confidence + rationale)
-2. Routes the request to a destination queue
-3. Generates a structured JSON ticket record
-4. Writes an audit log of all decisions
-5. Escalates low-confidence cases to **Human Review**
+---
 
-## Categories supported
-- recognition_help
-- award_fulfillment_issue
-- nomination_guidance
-- policy_eligibility
-- access_permissions
-- unknown (fallback)
+## Overview
 
-## Responsible AI guardrails (demo)
+A lightweight demo that mirrors a common **enterprise internal automation pattern**:
+
+**intake → AI-assisted classification → workflow routing → structured output → safe human fallback**
+
+This project is intentionally scoped to demonstrate how AI can be applied **responsibly** to support internal business operations, not as a customer-facing product.
+
+---
+
+## What this demonstrates (at a glance)
+
+- **Business-process-first automation**
+- **Workflow-based routing** (Power Automate–style thinking)
+- **AI used only where it adds value** (unstructured text understanding)
+- **Deterministic guardrails** (confidence thresholds, escalation)
+- **Explainable, auditable outputs** (JSON + audit log)
+
+---
+
+## Try these test queries
+
+Paste one of the following into the app to see different paths:
+
+### 1) Award fulfillment issue → Recognition Ops
+
+I redeemed my award but the order is still pending and I never received a confirmation or tracking email.
+
+
+### 2) Access / login issue → IT Support
+
+I can’t log in. SSO keeps failing and I get access denied when I try to sign in.
+
+
+### 3) Policy question → HR Ops
+
+Is there a monthly limit on how many points I’m allowed to give? Where is that policy documented?
+
+### 4) Ambiguous request → Human Review (fallback)
+
+Something seems off with recognition on my account and I’m not sure what changed.
+
+
+---
+
+## How AI is used (intentionally limited)
+
+- AI is applied **only at intake** to interpret unstructured text
+- It produces:
+  - an intent category
+  - a confidence score
+  - an explainable rationale
+- **AI does not make final workflow decisions**
+
+Routing, escalation, and actions remain **deterministic and auditable**.
+
+---
+
+## Responsible AI guardrails
+
 - Confidence threshold (0.70) controls auto-routing
 - Below threshold → **Human Review**
-- Explainability: classification includes rationale
-- No PII storage required (employee name is optional and unused in logic)
+- All AI-assisted decisions are logged
+- No irreversible or policy-enforcing decisions are made by AI
 
-## AI Usage & Model Strategy
+---
 
-This project is intentionally designed with a clear separation between **AI-assisted interpretation** and **deterministic workflow execution**.
+## Implementation note
 
-### Where AI is used
-AI is applied only at the **intake stage**, where it adds measurable value:
-- Interpreting unstructured free-text requests
-- Classifying intent into predefined categories
-- Producing a confidence score
-- Providing an explainable rationale for each decision
+For demo simplicity, the AI layer uses deterministic classification logic to simulate AI behavior.  
+In a production environment, this layer could be swapped for **Azure AI or Copilot** without changing the workflow, guardrails, or auditability.
 
-This mirrors common enterprise usage patterns where AI is best suited for **language understanding**, not for executing business-critical workflows.
+---
 
-### Current implementation (demo)
-For the purposes of this demo, the AI layer is implemented using **deterministic classification logic** (keyword and token scoring). This approach was chosen to:
-- Ensure full explainability
-- Avoid external dependencies
-- Keep the demo easy to run locally
-- Highlight workflow design rather than model tuning
+## Intended use
 
-The output contract (category, confidence, rationale) is intentionally model-agnostic.
+This demo represents an **internal automation pattern** for operations teams (People Ops, IT, Finance, Recognition Admin), not a client-facing feature.
 
-### Production-ready design
-In a production environment, this classification layer could be replaced with:
-- Microsoft Azure AI (Text Classification)
-- Azure OpenAI (Copilot-style LLM orchestration)
+---
 
-without changing:
-- Workflow logic
-- Confidence thresholds
-- Escalation rules
-- Audit logging
-- Downstream integrations
+## Run locally (optional)
 
-### Responsible AI guardrails
-- Confidence thresholds control automation vs. human review
-- Low-confidence cases are escalated automatically
-- All AI-assisted decisions are logged with rationale
-- AI does not make irreversible or policy-enforcing decisions
-
-This design prioritizes **safety, maintainability, and supportability** while still benefiting from AI where it is most effective.
-
-## Run locally
 ```bash
 python -m venv .venv
 source .venv/bin/activate
